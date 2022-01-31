@@ -1,0 +1,151 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>reveal.js</title><link rel="stylesheet" href="dist/reset.css"><link rel="stylesheet" href="dist/reveal.css"><link rel="stylesheet" href="dist/theme/black.css"><link href="https://fonts.googleapis.com/css?family=Comforter:regular" rel="stylesheet"/><link rel="stylesheet" href="plugin/highlight/monokai.css"><script defer="defer" src="node_vendors.e40d6e35fd6ab0002b88.js"></script><script defer="defer" src="main.79fb0198b3541d88d048.js"></script></head><body><div class="reveal"><div class="slides"><section data-transition="slide-in fade-out" data-auto-animate><p style="font-family: Comforter; font-size: 15rem;   text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;">KisS</p></section><section data-transition="fade-in fade-out" data-transition-speed="slow" data-auto-animate><img src="./assets/kiss.png" alt="kiss"></section><section data-transition="fade-in slide-out"><p style="font-family: Comforter; font-size: 8rem; text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;">"Keep it Simple, Smart"</p></section><section data-transition="fade-in slide-out" style="font-size: 1em; font-family: 'Arial Narrow'; color: white;"><p style="font-size: 3em; font-family: 'Comforter';">Introduction</p><p style="padding: 1rem; font-style: italic;">"Most software systems are unreasonably overloaded with practically unnecessary functions, which impairs the convenience of their use by end users, and also complicates their support and development by developers. Following the principle of "KISS" allows you to develop solutions that are easy to use and maintain."</p></section><section><p class="fragment fade-left">Short-circuit Evaluation</p><pre class="fragment fade-in-then-semi-out"><code data-line-numbers="6,8">
+						if(var1 === null ||
+						  var1 === undefined ||
+						  var1 === '')
+						  {
+							console.log("VARIABLE NOT FOUND!")
+					   	} else {
+						   console.log(var1)
+					   	}						
+					</code></pre><pre class="fragment fade-right">We can use short-circuit evaluation in many cases like
+						<code class="fragment fade-right">
+						console.log( var1 || "VARIABLE NOT FOUND!" )				
+						</code>
+					</pre></section><section><p class="fragment fade-left">Arrow Function</p><pre class="fragment fade-in-then-semi-out"><code>
+						function sayHello(name) {
+							console.log('Hello', name)
+						}
+					</code></pre><pre class="fragment fade-right">This was a trivial function, which can be replaced with arrow function
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+						const sayHello = name => console.log("Hello",name)				
+						</code>
+					</pre></section><section><p class="fragment fade-left">Avoid boring old for loop</p><pre class="fragment fade-in-then-semi-out"><code>
+						const list = [2, 5, 7, 2, 6, 2, 3, 5]
+						for (let i = 0; i &lt list.length; i++) {
+    					console.log(list[i])
+					</code></pre><pre class="fragment fade-right">
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							list.forEach(number => console.log(number))			
+						</code>
+					</pre></section><section><p class="fragment fade-left">Implicit Return</p><pre class="fragment fade-in-then-semi-out"><code data-line-numbers="3">
+						function doubleValue(value) {
+							return value * 2
+						}
+					</code></pre><pre class="fragment fade-right">When using arrow functions, we can return implicitly if the function has a single line/statement without using the return keyword.
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							const doubleValue = value => value * 2		
+						</code>
+					</pre><pre class="fragment fade-right"> We could return more complex values implicitly like —
+						<code class="fragment fade-right" style="overflow-x: hidden;">							
+							const getMeasures = length => ({
+							    area: length * length,
+							    volume: length * length * length
+							})		
+						</code>
+					</pre></section><section><p class="fragment fade-left">Default Parameters</p><pre class="fragment fade-in-then-semi-out"><code>
+						function volume(l, w, h) {
+							if (w === undefined)
+							  w = 1;
+							if (h === undefined)
+							  h = 1;
+							return l * w * h;
+						  }
+					</code></pre><pre class="fragment fade-right">Instead you can write
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							const volume = ( l, w = 1, h = 1) => l * w * h	
+						</code>
+					</pre></section><section><p class="fragment fade-left">Destructuring</p><pre class="fragment fade-in-then-semi-out"><code>
+						const person = {
+							first: 'Wes',
+							last: 'Bos',
+							country: 'Canada',
+							city: 'Hamilton',
+							twitter: '@wesbos'
+						  }
+  						const first = person.first
+  						const last = person.last
+					</code></pre><pre class="fragment fade-right">The repetitive assignment work is boring, so let’s make it less-boring
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							let { first, last } = person
+						</code>
+					</pre></section><section><pre class="fragment fade-right">Now, we can also set default values here if the property doesn’t exist
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							let { first = 'John' , last = 'Doe' } = person
+						</code>
+					</pre><pre class="fragment fade-right">We can also rename some property if need to,
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							let { first, last: surname} = person
+						</code>
+					</pre></section><section><p class="fragment fade-left">Spread operator</p><pre class="fragment fade-in-then-semi-out"><code>
+						const odd = [1, 2, 3]
+						const nums = [4, 5, 6].concat(odd)
+					</code></pre><pre class="fragment fade-right">Also we can use
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							const nums = [4, 5, 6, ...odd]
+						</code>
+					</pre><pre class="fragment fade-right">This also works with Object types
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							const obj1 = { a: 1, b: 2, c: 3}
+							const obj2 = { …obj1, d: 4 }
+						</code>
+						in both cases we will get the same result
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							 { a: 1, b: 2, c: 3, d: 4}
+						</code>
+					</pre></section><section><p class="fragment fade-left">Importing Modules</p><pre class="fragment fade-right">
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							import mobx from 'mobx'
+						</code>
+					</pre><pre class="fragment fade-right">We need only a few things most of the time.
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+			import { observable, action, runInAction } from ‘mobx’
+						</code>
+					</pre></section><section><p class="fragment fade-left">Async/Await over Promises</p><pre class="fragment fade-right">
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							const makeRequest = () =>
+							  getJSON()
+							    .then(data => {
+							      console.log(data)
+							      return "done"
+							    })
+							
+							makeRequest()
+						</code>
+					</pre><pre class="fragment fade-right">If we transform this promise based code to async/await code block, it’ll look like below
+						<code class="fragment fade-right" style="overflow-x: hidden;">
+							const makeRequest = async () => {
+								console.log(await getJSON())
+								return "done"
+							  }
+							  
+							  makeRequest()
+						</code>
+					</pre></section><section><p class="fragment fade-left">Map, Filter, Reduce</p><pre class="fragment fade-right">If we use our traditional for-loop -
+						<code class="fragment fade-right" style="overflow-x: hidden;" data-line-numbers="8-11">
+			let distances = [
+			  { from: 'New York', to: 'Dhaka', distance: 12654},
+			  { from: 'Sydney', to: 'chittagong', distance: 8858},
+			  { from: 'Kolkata', to: 'Sylhet', distance: 670}
+			]						
+			let total = 0
+			for(let i = 0; i &lt distances.length; i++){
+			  if(distances[i].distance &lt 10000){
+			    total += distances[i].distance * 0.621371
+			  }
+			}
+			console.log(total)
+						</code>
+					</pre></section><section><p class="fragment fade-left">That code works! Now, let’s try it with map-filter-reduce</p><pre class="fragment fade-right">
+						<code class="fragment fade-right" style="overflow-x: hidden;" data-line-numbers="8-11">
+			let distances = [
+			{ from: 'New York', to: 'Dhaka', distance: 12654},
+			{ from: 'Sydney', to: 'chittagong', distance: 8858},
+			{ from: 'Kolkata', to: 'Sylhet', distance: 670}
+			]
+
+			let total = distances.filter(item => item.distance &lt 10000)
+							  .map(item => item.distance * 0.621371)
+							  .reduce((prev, distance) => prev + distance, 0)
+			console.log(total)
+						</code>
+					</pre></section><section><p style="font-family: Comforter; font-size: 8rem; text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;">Thanks for watching this presentation!</p></section></div></div></body></html>
